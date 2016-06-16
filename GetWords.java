@@ -39,7 +39,7 @@ public class GetWords extends BinarySearchTree
 				StringTokenizer s;
 				
 				
- 				s=new StringTokenizer(str," ");
+ 				s=new StringTokenizer(str,"");
 
  			
 				while (s.hasMoreTokens()) 
@@ -48,7 +48,9 @@ public class GetWords extends BinarySearchTree
 					String strdata=s.nextToken();
 					String[] all;
 					all = strdata .split("-");
-					b.insert(all[0],all[1]);
+					String allInOne = all[2];
+					String[] similarWords = allInOne.split(",");
+					b.insert(all[0],all[1],similarWords);
 					
 				}				
 				//bufferedWriter.write("\n");			
@@ -66,9 +68,17 @@ public class GetWords extends BinarySearchTree
 			System.out.println("");
 			System.out.println("\n Delete Node Typical : " + b.delete("Typical"));		
 			b.display(root);
+			System.out.println("");
+			System.out.println("the word puppy meaning is " + b.search("puppy"));
+			System.out.println("the word hell meaning is " + b.search("hell"));
+			System.out.print("the word puppy similar words are : " );
+			b.printSimilarWords("puppy");
+			System.out.println("");
+			System.out.println("the word pup meaning is " + b.search("pupp"));
+			System.out.print("the word puppy similar words are : " );
+			b.printSimilarWords("pupp");
 			
-			
-			
+		
            bufferedReader.close();
 		   bufferedWriter.flush();
 		   bufferedWriter.close();

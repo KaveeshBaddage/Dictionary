@@ -20,6 +20,57 @@ public class BinarySearchTree {
 		}
 		return false;
 	}
+	
+	public String search(String sWord){
+			
+		String id = sWord.toLowerCase();
+		Node current = root;
+		while(current!=null){
+			if((current.data).equals(id)){
+				//System.out.println(current.meaning);
+				//break;
+				return current.meaning;
+			}else if(((current.data).compareTo(id))>0){
+				current = current.left;
+			}else{
+				current = current.right;
+			}
+		}
+		//System.out.println("Word is not there");
+		return "is not there";
+		}
+	
+	public String[] similarWord(String sWord){
+			
+		String id = sWord.toLowerCase();
+		Node current = root;
+		while(current!=null){
+			if((current.data).equals(id)){
+				//System.out.println(current.meaning);
+				//break;
+				return current.similar;
+			}else if(((current.data).compareTo(id))>0){
+				current = current.left;
+			}else{
+				current = current.right;
+			}
+		}
+		//System.out.println("Word is not there");
+		String[] a = new String[0];
+		return a;
+		}
+		
+		public void printSimilarWords(String word){
+			String[] a = similarWord(word);
+			if((a.length)!=0){
+			for(String z : a){
+				System.out.print(z + " ");
+			}
+			}
+			else{
+				System.out.print("Word is not there");
+			}
+		}
 	public boolean delete(String d){
 		String id = d.toLowerCase();
 		Node parent = root;
@@ -39,21 +90,6 @@ public class BinarySearchTree {
 			}
 		}
 		
-		public void search(String sWord){
-			String id = d.toLowerCase();
-		Node current = root;
-		while(current!=null){
-			if((current.data).equals(id)){
-				System.out.println(current.meaning);
-			}else if(((current.data).compareTo(id))>0){
-				current = current.left;
-			}else{
-				current = current.right;
-			}
-		}
-		System.out.println("Word is not there");
-		}
-			
 		
 		//if i am here that means we have found the node
 		//Case 1: if node to be deleted has no children
@@ -119,9 +155,9 @@ public class BinarySearchTree {
 		}
 		return successsor;
 	}
-	public void insert(String d ,String m){
+	public void insert(String d ,String m,String[] similar){
 		String id = d.toLowerCase();
-		Node newNode = new Node(id,m);
+		Node newNode = new Node(id,m,similar);
 		if(root==null){
 			root = newNode;
 			return;
@@ -173,11 +209,13 @@ public class BinarySearchTree {
 class Node{
 	String data;
 	String meaning;
+	String[] similar;
 	Node left;
 	Node right;	
-	public Node(String d,String m){
+	public Node(String d,String m,String[] s){
 		String data = d.toLowerCase();
 		meaning = m;
+		similar =s;
 		this.data = data;
 		left = null;
 		right = null;
